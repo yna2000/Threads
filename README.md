@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.util.concurrent.locks.ReentrantLock;
-
 public class Junaz {
     private static final Logger logger = Logger.getLogger(Junaz.class.getName());
 
