@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
-import java.util.concurrent.locks.ReentrantLock;
+
 public class Junaz {
     private static final Logger logger = Logger.getLogger(Junaz.class.getName());
 
@@ -65,29 +65,5 @@ public class Junaz {
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
         String formattedCpuTime = currencyFormat.format(cpuTime);
         logger.info(thread.getName() + " is " + thread.getState() + ", CPU time: " + formattedCpuTime);
-    }
-
-    static class CustomTask implements Runnable {
-        private final String threadName;
-        private static final Logger logger = Logger.getLogger(CustomTask.class.getName());
-        private final ReentrantLock lock = new ReentrantLock();
-
-        public CustomTask(String threadName) {
-            this.threadName = threadName;
-        }
-
-        @Override
-        public void run() {
-            try {
-                logger.info(threadName + " is " + Thread.currentThread().getState());
-                lock.lock();
-                TimeUnit.MILLISECONDS.sleep(300);
-            } catch (InterruptedException e) {
-                logger.log(Level.SEVERE, threadName + " was interrupted", e);
-            } finally {
-                lock.unlock();
-                logger.info(threadName + " finished execution");
-            }
-        }
     }
 }
